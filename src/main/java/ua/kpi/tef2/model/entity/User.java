@@ -8,7 +8,7 @@ public class User {
 
     private String password;
 
-    private Role role;
+    private String role;
 
     public User() {
     }
@@ -18,18 +18,22 @@ public class User {
         this.password = password;
     }
 
-    public User(String login, String password, Role role) {
+    public User(String login, String password, String role) {
         this.login = login;
         this.password = password;
         this.role = role;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getLogin() {
+        return login;
     }
 
     public int getId() {
@@ -38,10 +42,6 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getLogin() {
-        return login;
     }
 
     public void setLogin(String login) {
@@ -54,5 +54,15 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

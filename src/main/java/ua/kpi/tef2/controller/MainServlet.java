@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static ua.kpi.tef2.controller.PageNames.ERROR_PAGE;
+import static ua.kpi.tef2.controller.PageNames.LOGIN_PAGE;
 
 
 @WebServlet("/")
@@ -42,6 +42,15 @@ public class MainServlet extends HttpServlet {
         Command command = commands.getOrDefault(commandName, (def) -> "index.jsp");
 
         String path = command.execute(request);
+        if (isLoginPage(path)) {
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            return;
+        }
+
         request.getRequestDispatcher(path).forward(request, response);
+    }
+
+    private boolean isLoginPage(String pageName) {
+        return pageName.equals(LOGIN_PAGE);
     }
 }
