@@ -35,13 +35,11 @@ public class JdbcDaoFactory extends DaoFactory {
 
     public Properties loadConnectionProperties() {
         Properties prop = new Properties();
-
         try (InputStream in = new FileInputStream("Connection.properties")) {
             prop.load(in);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return prop;
     }
 }
