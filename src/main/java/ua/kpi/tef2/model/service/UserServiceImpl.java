@@ -9,8 +9,9 @@ import ua.kpi.tef2.model.exceptions.UserAlreadyExistsException;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
+    private final String ROLE_USER = "USER";
 
-    UserDao userDao;
+    private UserDao userDao;
 
     public UserServiceImpl() {
         this.userDao = DaoFactory.getInstance().createUserDao();
@@ -18,6 +19,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveNewUser(User user) throws UserAlreadyExistsException {
+        user.setRole(ROLE_USER);
         userDao.save(user);
     }
 

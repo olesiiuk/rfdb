@@ -2,13 +2,27 @@ import ua.kpi.tef2.model.dao.UserDao;
 import ua.kpi.tef2.model.dao.factory.DaoFactory;
 import ua.kpi.tef2.model.dao.factory.JdbcDaoFactory;
 import ua.kpi.tef2.model.entity.User;
+import ua.kpi.tef2.model.exceptions.UserAlreadyExistsException;
+import ua.kpi.tef2.model.service.UserService;
+import ua.kpi.tef2.model.service.UserServiceImpl;
 
 import java.util.List;
 import java.util.Optional;
 
 public class App {
     public static void main(String[] args) {
+        UserService userService = new UserServiceImpl();
 
+        User user = new User("login1", "password", "USER");
+        try {
+            userService.saveNewUser(user);
+        } catch (UserAlreadyExistsException e) {
+            e.getMessage();
+        }
+
+    }
+
+    private static void testCRUD() {
         DaoFactory factory = new JdbcDaoFactory();
         UserDao userDao = factory.createUserDao();
 
@@ -38,6 +52,5 @@ public class App {
 
         List<User> users1 = userDao.findAll();
         users1.forEach(System.out::println);
-
     }
 }

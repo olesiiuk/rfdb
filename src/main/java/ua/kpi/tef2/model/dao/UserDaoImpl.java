@@ -31,7 +31,6 @@ public class UserDaoImpl implements UserDao {
         this.connection = connection;
     }
 
-    //TODO implement this methods
     @Override
     public void save(User entity) {
         try {

@@ -25,10 +25,11 @@ public class JdbcDaoFactory extends DaoFactory {
 //        String url = prop.get("connectionUrl").toString();
 
         try {
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             return DriverManager.getConnection("jdbc:mysql://localhost:3306/rfdb", "root", "root");
 //            return DriverManager.getConnection(url, prop);
         } catch (SQLException e) {
-            throw new RuntimeException("Could not establish connection to db");
+            throw new RuntimeException(e);
         }
     }
 
