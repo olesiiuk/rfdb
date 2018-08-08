@@ -1,12 +1,12 @@
 package ua.kpi.tef2.model.dao.factory;
 
-import ua.kpi.tef2.model.dao.UserDaoImpl;
+import ua.kpi.tef2.model.dao.UserDao;
 
 public abstract class DaoFactory {
 
     private static DaoFactory daoFactory;
 
-    public abstract UserDaoImpl createUserDao();
+    public abstract UserDao createUserDao();
 
     public static DaoFactory getInstance() {
 

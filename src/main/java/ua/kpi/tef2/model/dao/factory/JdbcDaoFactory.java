@@ -1,5 +1,6 @@
 package ua.kpi.tef2.model.dao.factory;
 
+import ua.kpi.tef2.model.dao.UserDao;
 import ua.kpi.tef2.model.dao.UserDaoImpl;
 
 import java.io.FileInputStream;
@@ -14,9 +15,8 @@ public class JdbcDaoFactory extends DaoFactory {
 
     private final static String propertiesFile = "Connection.properties";
 
-
     @Override
-    public UserDaoImpl createUserDao() {
+    public UserDao createUserDao() {
         return new UserDaoImpl(getConnection());
     }
 
