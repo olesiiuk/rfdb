@@ -1,11 +1,9 @@
 package ua.kpi.tef2.model.dao;
 
 import ua.kpi.tef2.model.entity.User;
+import ua.kpi.tef2.model.exceptions.UserAlreadyExistsException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +30,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void save(User entity) {
+    public void save(User entity) throws UserAlreadyExistsException {
         try {
             PreparedStatement statement = connection.prepareStatement(INSERT_USER_QUERY);
             statement.setString(1, entity.getLogin());
@@ -40,6 +38,8 @@ public class UserDaoImpl implements UserDao {
             statement.setString(3, entity.getRole());
 
             statement.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            throw new UserAlreadyExistsException(entity.getLogin());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

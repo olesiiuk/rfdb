@@ -22,7 +22,7 @@ public class App {
 
     }
 
-    private static void testCRUD() {
+    private static void testCRUD() throws UserAlreadyExistsException {
         DaoFactory factory = new JdbcDaoFactory();
         UserDao userDao = factory.createUserDao();
 

@@ -18,7 +18,7 @@ import static ua.kpi.tef2.controller.PageNames.LOGIN_PAGE;
 @WebServlet("/")
 public class MainServlet extends HttpServlet {
 
-    private final String CONTEXT_PATH_REG_EX = ".*/app/\\$%7BpageContext.request.contextPath%7D/";
+    private final String CONTEXT_PATH_REG_EX = ".*/app/";
     private Map<String, Command> commands = new HashMap<>();
 
     @Override
@@ -43,7 +43,7 @@ public class MainServlet extends HttpServlet {
 
         String path = command.execute(request);
         if (isLoginPage(path)) {
-            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            response.sendRedirect(request.getContextPath() + LOGIN_PAGE);
             return;
         }
 

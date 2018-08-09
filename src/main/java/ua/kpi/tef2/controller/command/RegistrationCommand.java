@@ -17,7 +17,6 @@ public class RegistrationCommand implements Command {
     private final String CONFIRM_PASSWORD_ATR_NAME = "confirmPassword";
     private final String ERROR_MESSAGE = "errorMessage";
 
-    //TODO save user to db and assign ROLE
     private UserService userService = new UserServiceImpl();
 
 
@@ -35,11 +34,6 @@ public class RegistrationCommand implements Command {
         User newUser = new User(email, password);
         try {
             userService.saveNewUser(newUser);
-//            //TODO throwing exception just to test it
-//            boolean a = true;
-//            if (a) {
-//                throw new UserAlreadyExistsException(email);
-//            }
         } catch (UserAlreadyExistsException e) {
             request.setAttribute(ERROR_MESSAGE, e.getMessage());
             return REGISTRATION_PAGE;
