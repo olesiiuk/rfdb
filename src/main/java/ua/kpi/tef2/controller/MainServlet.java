@@ -1,6 +1,7 @@
 package ua.kpi.tef2.controller;
 
 import ua.kpi.tef2.controller.command.Command;
+import ua.kpi.tef2.controller.command.LoginCommand;
 import ua.kpi.tef2.controller.command.RegistrationCommand;
 
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static ua.kpi.tef2.controller.PageNames.LOGIN_PAGE;
+import static ua.kpi.tef2.controller.PageNames.START_PAGE;
 
 
 @WebServlet("/")
@@ -24,6 +26,7 @@ public class MainServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         commands.put("registration", new RegistrationCommand());
+        commands.put("login", new LoginCommand());
     }
 
     @Override
@@ -39,7 +42,7 @@ public class MainServlet extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String commandName = request.getRequestURI().replaceAll(CONTEXT_PATH_REG_EX, "");
-        Command command = commands.getOrDefault(commandName, (def) -> "index.jsp");
+        Command command = commands.getOrDefault(commandName, (def) -> START_PAGE);
 
         String path = command.execute(request);
         if (isLoginPage(path)) {
@@ -47,10 +50,15 @@ public class MainServlet extends HttpServlet {
             return;
         }
 
+
         request.getRequestDispatcher(path).forward(request, response);
     }
 
     private boolean isLoginPage(String pageName) {
         return pageName.equals(LOGIN_PAGE);
+    }
+
+    private boolean isRolledPage(String pageName) {
+        return pageName.startsWith()
     }
 }

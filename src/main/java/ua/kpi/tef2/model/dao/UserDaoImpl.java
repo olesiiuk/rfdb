@@ -121,6 +121,7 @@ public class UserDaoImpl implements UserDao {
     public Optional<User> findOneByEmail(String email) {
         try {
             PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_EMAIL);
+            statement.setString(1, email);
 
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
