@@ -39,6 +39,6 @@ public class RegistrationCommand implements Command {
             return REGISTRATION_PAGE;
         }
 
-        return LOGIN_PAGE;
+        return REDIRECT_PREFIX + LOGIN_PAGE;
     }
 }

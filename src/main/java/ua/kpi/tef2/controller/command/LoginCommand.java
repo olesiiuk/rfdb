@@ -45,10 +45,10 @@ public class LoginCommand implements Command {
         String role = user.getRole();
         if (role.equals("USER")) {
             addUserToServletContextAndSession(user, request);
-            return USER_HOME_PAGE;
+            return REDIRECT_PREFIX + USER_HOME_PAGE;
         } else if (role.equals("ADMIN")) {
             addUserToServletContextAndSession(user, request);
-            return ADMIN_HOME_PAGE;
+            return REDIRECT_PREFIX + ADMIN_HOME_PAGE;
         }
 
         return ERROR_PAGE;

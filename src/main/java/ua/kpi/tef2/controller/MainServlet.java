@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static ua.kpi.tef2.controller.PageNames.LOGIN_PAGE;
+import static ua.kpi.tef2.controller.PageNames.REDIRECT_PREFIX;
 import static ua.kpi.tef2.controller.PageNames.START_PAGE;
 
 
@@ -45,8 +46,8 @@ public class MainServlet extends HttpServlet {
         Command command = commands.getOrDefault(commandName, (def) -> START_PAGE);
 
         String path = command.execute(request);
-        if (isLoginPage(path)) {
-            response.sendRedirect(request.getContextPath() + LOGIN_PAGE);
+        if (isPageToRedirect(path)) {
+            response.sendRedirect(request.getContextPath() + cutRedirectPrefix(path));
             return;
         }
 
@@ -54,11 +55,15 @@ public class MainServlet extends HttpServlet {
         request.getRequestDispatcher(path).forward(request, response);
     }
 
+    private String cutRedirectPrefix(String path) {
+        return path.replace(REDIRECT_PREFIX, "");
+    }
+
     private boolean isLoginPage(String pageName) {
         return pageName.equals(LOGIN_PAGE);
     }
 
-    private boolean isRolledPage(String pageName) {
-        return pageName.startsWith()
+    private boolean isPageToRedirect(String pageName) {
+        return pageName.startsWith(REDIRECT_PREFIX);
     }
 }
