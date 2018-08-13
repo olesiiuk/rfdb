@@ -35,6 +35,10 @@
             <td><input type="text" name="email"></td>
         </tr>
         <tr>
+            <th><fmt:message key="message.name"/> </th>
+            <td><input type="text" name="userName"/></td>
+        </tr>
+        <tr>
             <th><fmt:message key="message.password"/> </th>
             <td><input type="password" name="password"></td>
         </tr>

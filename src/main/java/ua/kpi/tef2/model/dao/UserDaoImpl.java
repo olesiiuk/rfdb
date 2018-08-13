@@ -14,13 +14,14 @@ public class UserDaoImpl implements UserDao {
     private final String USER_LOGIN_FIELD_NAME = "login";
     private final String USER_PASSWORD_FIELD_NAME = "password";
     private final String USER_ROLE_FIELD_NAME = "role";
+    private final String USER_NAME_FIELD = "name";
 
-    private final String INSERT_USER_QUERY = "INSERT INTO users (login, password, role) VALUES (?, ?, ?)";
+    private final String INSERT_USER_QUERY = "INSERT INTO users (login, password, name, role) VALUES (?, ?, ?, ?)";
     private final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE id=?";
     private final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE login = ?";
 
     private final String SELECT_ALL_USERS = "SELECT * FROM users";
-    private final String UPDATE_USER = "UPDATE users SET login = ?, password = ?, role = ? WHERE id = ?";
+    private final String UPDATE_USER = "UPDATE users SET login = ?, password = ?, name = ? role = ? WHERE id = ?";
     private final String DELETE_USER = "DELETE FROM users WHERE id = ?";
 
     private Connection connection;
@@ -67,6 +68,7 @@ public class UserDaoImpl implements UserDao {
             user.setId(rs.getInt(USER_ID_FIELD_NAME));
             user.setLogin(rs.getString(USER_LOGIN_FIELD_NAME));
             user.setPassword(rs.getString(USER_PASSWORD_FIELD_NAME));
+            user.setName(rs.getString(USER_NAME_FIELD));
             user.setRole(rs.getString(USER_ROLE_FIELD_NAME));
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -97,8 +99,9 @@ public class UserDaoImpl implements UserDao {
             PreparedStatement statement = connection.prepareStatement(UPDATE_USER);
             statement.setString(1, entity.getLogin());
             statement.setString(2, entity.getPassword());
-            statement.setString(3, entity.getRole());
-            statement.setInt(4, entity.getId());
+            statement.setString(3, entity.getName());
+            statement.setString(4, entity.getRole());
+            statement.setInt(5, entity.getId());
 
             statement.executeUpdate();
         } catch (SQLException e) {

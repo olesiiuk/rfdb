@@ -16,6 +16,7 @@ public class RegistrationCommand implements Command {
     private final String PASSWORD_ATR_NAME = "password";
     private final String CONFIRM_PASSWORD_ATR_NAME = "confirmPassword";
     private final String ERROR_MESSAGE = "errorMessage";
+    private final String USER_NAME_PARAM = "userName";
 
     private UserService userService = new UserServiceImpl();
 
@@ -26,12 +27,13 @@ public class RegistrationCommand implements Command {
         String email = request.getParameter(EMAIL_ATTR_NAME);
         String password = request.getParameter(PASSWORD_ATR_NAME);
         String confirmPassword = request.getParameter(CONFIRM_PASSWORD_ATR_NAME);
+        String userName = request.getParameter(USER_NAME_PARAM);
 
-        if (InputValidator.isNotValidEmailAndPassword(email, password, confirmPassword)) {
+        User newUser = new User(email, password, userName);
+        if (InputValidator.isNotValidUserData(newUser, confirmPassword)) {
             return ERROR_PAGE;
         }
 
-        User newUser = new User(email, password);
         try {
             userService.saveNewUser(newUser);
         } catch (UserAlreadyExistsException e) {

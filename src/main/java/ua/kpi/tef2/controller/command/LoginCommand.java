@@ -29,7 +29,7 @@ public class LoginCommand implements Command {
         String email = request.getParameter(EMAIL_ATR);
         String password = request.getParameter(PASSWORD_ATR);
 
-        if (InputValidator.isNotValidEmailAndPassword(email, password)) {
+        if (InputValidator.isNotValidUserData(email, password)) {
             return ERROR_PAGE;
         }
 

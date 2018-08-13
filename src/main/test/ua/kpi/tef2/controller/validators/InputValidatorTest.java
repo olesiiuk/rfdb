@@ -1,6 +1,7 @@
 package ua.kpi.tef2.controller.validators;
 
 import org.junit.Test;
+import ua.kpi.tef2.model.entity.User;
 
 import static org.junit.Assert.*;
 
@@ -8,17 +9,31 @@ public class InputValidatorTest {
 
     @Test
     public void testValidateGoodEmail() {
-        assertTrue(InputValidator.isNotValidEmailAndPassword( "test@email.com.ua", "password", "password"));
-        assertTrue(InputValidator.isNotValidEmailAndPassword( "test@email.com", "21341234^sd_s.", "21341234^sd_s."));
-        assertTrue(InputValidator.isNotValidEmailAndPassword( "te.s_t@email.com", "Ldsf@#dfsfds", "Ldsf@#dfsfds"));
+        User user = new User("test@email.com.ua", "password", "name");
+        assertFalse(InputValidator.isNotValidUserData(user, "password"));
+
+        user.setLogin("test@email.com");
+        user.setPassword("21341234^sd_s.");
+        assertFalse(InputValidator.isNotValidUserData(user, "21341234^sd_s."));
+
+        user.setLogin("te.s_t@email.com");
+        user.setPassword("Ldsf@#dfsfds");
+        assertFalse(InputValidator.isNotValidUserData(user, "Ldsf@#dfsfds"));
     }
 
     @Test
     public void testValidateBadEmail() {
-        assertFalse(InputValidator.isNotValidEmailAndPassword( "t/e.s_t@email.com", "asdfjklgh", "asdfjklgh"));
-        assertFalse(InputValidator.isNotValidEmailAndPassword( "te.s_t@ema il.com", "askdjfhsk", "askdjfhsk"));
-        assertFalse(InputValidator.isNotValidEmailAndPassword( "tes t@ema il.com", "sldakfhlaskd", "sldakfhlaskd"));
-        assertFalse(InputValidator.isNotValidEmailAndPassword( "test@email.com", "sldakfhlaskd", "sldakfaskd"));
+        User user = new User("t/e.s_t@email.com", "asdfjklgh", "name");
+        assertTrue(InputValidator.isNotValidUserData(user, "asdfjklgh"));
+
+        user = new User("te.s_t@ema il.com", "askdjfhsk", "name");
+        assertTrue(InputValidator.isNotValidUserData(user, "askdjfhsk"));
+
+        user = new User("tes t@ema il.com", "sldakfhlaskd", "name");
+        assertTrue(InputValidator.isNotValidUserData(user, "sldakfhlaskd"));
+
+        user = new User("test@email.com", "sldakfhlaskd", "name");
+        assertTrue(InputValidator.isNotValidUserData(user, "sldakfaskd"));
     }
 
 

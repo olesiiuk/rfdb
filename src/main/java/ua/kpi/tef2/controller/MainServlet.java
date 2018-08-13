@@ -46,7 +46,8 @@ public class MainServlet extends HttpServlet {
 
         String path = command.execute(request);
         if (isPageToRedirect(path)) {
-            response.sendRedirect(request.getContextPath() + cutRedirectPrefix(path));
+            String contextPath = request.getContextPath();
+            response.sendRedirect(contextPath + cutRedirectPrefix(path));
             return;
         }
 
