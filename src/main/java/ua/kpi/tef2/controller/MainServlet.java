@@ -1,6 +1,7 @@
 package ua.kpi.tef2.controller;
 
 import ua.kpi.tef2.controller.command.Command;
+import ua.kpi.tef2.controller.command.LogOutCommand;
 import ua.kpi.tef2.controller.command.LoginCommand;
 import ua.kpi.tef2.controller.command.RegistrationCommand;
 
@@ -13,21 +14,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static ua.kpi.tef2.controller.PageNames.LOGIN_PAGE;
-import static ua.kpi.tef2.controller.PageNames.REDIRECT_PREFIX;
-import static ua.kpi.tef2.controller.PageNames.START_PAGE;
+import static ua.kpi.tef2.controller.PageNames.*;
 
 
 @WebServlet("/")
 public class MainServlet extends HttpServlet {
 
-    private final String CONTEXT_PATH_REG_EX = ".*/app/";
     private Map<String, Command> commands = new HashMap<>();
 
     @Override
     public void init() throws ServletException {
         commands.put("registration", new RegistrationCommand());
         commands.put("login", new LoginCommand());
+        commands.put("logout", new LogOutCommand());
     }
 
     @Override
@@ -43,14 +42,13 @@ public class MainServlet extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String commandName = request.getRequestURI().replaceAll(CONTEXT_PATH_REG_EX, "");
-        Command command = commands.getOrDefault(commandName, (def) -> START_PAGE);
+        Command command = commands.getOrDefault(commandName, (def) -> HOME_PAGE);
 
         String path = command.execute(request);
         if (isPageToRedirect(path)) {
             response.sendRedirect(request.getContextPath() + cutRedirectPrefix(path));
             return;
         }
-
 
         request.getRequestDispatcher(path).forward(request, response);
     }

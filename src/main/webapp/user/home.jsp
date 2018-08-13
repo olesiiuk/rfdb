@@ -11,6 +11,9 @@
     <title>Main Page</title>
 </head>
 <body>
-    <h2>Hello, user</h2>
+    <h2>Hello, ${sessionScope.get("login")}</h2>
+    <form method="post" action="${pageContext.request.contextPath}/logout">
+        <button type="submit">Logout</button>
+    </form>
 </body>
 </html>
