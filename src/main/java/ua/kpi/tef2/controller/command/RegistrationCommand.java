@@ -20,7 +20,6 @@ public class RegistrationCommand implements Command {
 
     private UserService userService = new UserServiceImpl();
 
-
     @Override
     public String execute(HttpServletRequest request) {
 

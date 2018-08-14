@@ -41,7 +41,6 @@ public class LoginCommand implements Command {
             return LOGIN_PAGE;
         }
         //TODO define users role and send him to the correct page
-
         String role = user.getRole();
         if (role.equals("USER")) {
             addUserToServletContextAndSession(user, request);
