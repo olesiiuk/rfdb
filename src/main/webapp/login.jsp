@@ -20,7 +20,7 @@
     <title><fmt:message key="title.page.login"/> </title>
 </head>
 <body>
-<c:import url="header.jsp" charEncoding="UTF-8"/>
+<c:import url="guesHeader.jsp" charEncoding="UTF-8"/>
 <br/>
 
 <h2><fmt:message key="title.page.login"/></h2>

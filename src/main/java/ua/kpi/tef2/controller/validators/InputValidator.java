@@ -10,6 +10,7 @@ public class InputValidator {
 
     public static boolean isNotValidUserData(User user, String confirmPassword) {
 
+        //TODO refactor this method
         String email = user.getLogin();
         String password = user.getPassword();
         String userName = user.getName();

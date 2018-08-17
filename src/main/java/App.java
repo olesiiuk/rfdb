@@ -4,7 +4,7 @@ import ua.kpi.tef2.model.dao.factory.JdbcDaoFactory;
 import ua.kpi.tef2.model.entity.User;
 import ua.kpi.tef2.model.exceptions.UserAlreadyExistsException;
 import ua.kpi.tef2.model.service.UserService;
-import ua.kpi.tef2.model.service.UserServiceImpl;
+import ua.kpi.tef2.model.service.impl.UserServiceImpl;
 
 import java.util.List;
 import java.util.Optional;

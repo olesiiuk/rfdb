@@ -1,10 +1,11 @@
-package ua.kpi.tef2.model.service;
+package ua.kpi.tef2.model.service.impl;
 
 import ua.kpi.tef2.model.dao.UserDao;
 import ua.kpi.tef2.model.dao.factory.DaoFactory;
 import ua.kpi.tef2.model.entity.User;
 import ua.kpi.tef2.model.exceptions.LoginAndPasswordException;
 import ua.kpi.tef2.model.exceptions.UserAlreadyExistsException;
+import ua.kpi.tef2.model.service.UserService;
 
 import java.util.Optional;
 

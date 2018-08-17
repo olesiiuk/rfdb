@@ -34,10 +34,10 @@ public class UserDaoImpl implements UserDao {
     public void save(User entity) throws UserAlreadyExistsException {
         try {
             PreparedStatement statement = connection.prepareStatement(INSERT_USER_QUERY);
+
             statement.setString(1, entity.getLogin());
             statement.setString(2, entity.getPassword());
             statement.setString(3, entity.getRole());
-
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException ex) {
             throw new UserAlreadyExistsException(entity.getLogin());
@@ -51,7 +51,6 @@ public class UserDaoImpl implements UserDao {
         try {
             PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_ID);
             statement.setInt(1, id);
-
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 return compileUser(rs);
@@ -125,7 +124,6 @@ public class UserDaoImpl implements UserDao {
         try {
             PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_EMAIL);
             statement.setString(1, email);
-
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 return compileUser(rs);

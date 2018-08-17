@@ -4,7 +4,7 @@ import ua.kpi.tef2.controller.validators.InputValidator;
 import ua.kpi.tef2.model.entity.User;
 import ua.kpi.tef2.model.exceptions.LoginAndPasswordException;
 import ua.kpi.tef2.model.service.UserService;
-import ua.kpi.tef2.model.service.UserServiceImpl;
+import ua.kpi.tef2.model.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -65,6 +65,8 @@ public class LoginCommand implements Command {
         if (users == null) {
             users = new HashMap<>();
         }
+
+        //TODO не класть в сессию роль, убрать отсюда
         users.put(user.getLogin(), user.getRole());
         context.setAttribute("loggedUsers", users);
     }

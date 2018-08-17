@@ -12,7 +12,7 @@
     <fmt:setBundle basename="Messages"/>
 </head>
 <body>
-<c:import url="header.jsp" charEncoding="utf-8"/>
+<c:import url="guesHeader.jsp" charEncoding="utf-8"/>
 <br/>
 
 <h2><fmt:message key="message.welcome"/></h2>

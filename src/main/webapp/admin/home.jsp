@@ -17,13 +17,11 @@
 
 <html>
 <head>
-    <c:import url="/header.jsp" charEncoding="utf-8"/>
+    <c:import url="/userHeader.jsp" charEncoding="utf-8"/>
     <title><fmt:message key="title.page.admin.home"/></title>
 </head>
 <body>
     <h2><fmt:message key="message.welcome.admin"/>${sessionScope.get("login")}</h2>
-    <form method="post" action="${pageContext.request.contextPath}/logout">
-        <button type="submit">Logout</button>
-    </form>
+
 </body>
 </html>

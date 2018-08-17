@@ -24,7 +24,7 @@
 <c:if test="${not empty errorMessage}">
     <h2>${errorMessage}</h2>
 </c:if>
-<c:import url="header.jsp" charEncoding="utf-8"/>
+<c:import url="guesHeader.jsp" charEncoding="utf-8"/>
 <br/>
 
 <h2><fmt:message key="title.page.registration"/></h2>

@@ -13,33 +13,18 @@ import java.util.Properties;
 
 public class JdbcDaoFactory extends DaoFactory {
 
-    private final static String propertiesFile = "Connection.properties";
-
     @Override
     public UserDao createUserDao() {
         return new UserDaoImpl(getConnection());
     }
 
     private Connection getConnection() {
-//        Properties prop = loadConnectionProperties();
-//        String url = prop.get("connectionUrl").toString();
-
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             return DriverManager.getConnection("jdbc:mysql://localhost:3306/rfdb", "root", "root");
-//            return DriverManager.getConnection(url, prop);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public Properties loadConnectionProperties() {
-        Properties prop = new Properties();
-        try (InputStream in = new FileInputStream("Connection.properties")) {
-            prop.load(in);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return prop;
-    }
 }

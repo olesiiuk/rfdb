@@ -20,11 +20,9 @@
     <title>Main Page</title>
 </head>
 <body>
-<c:import url="/header.jsp" charEncoding="utf-8"/>
+<c:import url="/userHeader.jsp" charEncoding="utf-8"/>
 <br/>
     <h2><fmt:message key="message.welcome.user"/>${sessionScope.get("login")}</h2>
-    <form method="post" action="${pageContext.request.contextPath}/logout">
-        <button type="submit">Logout</button>
-    </form>
+
 </body>
 </html>
