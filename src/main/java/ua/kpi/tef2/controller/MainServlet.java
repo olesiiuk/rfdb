@@ -1,9 +1,6 @@
 package ua.kpi.tef2.controller;
 
-import ua.kpi.tef2.controller.command.Command;
-import ua.kpi.tef2.controller.command.LogOutCommand;
-import ua.kpi.tef2.controller.command.LoginCommand;
-import ua.kpi.tef2.controller.command.RegistrationCommand;
+import ua.kpi.tef2.controller.command.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,6 +24,7 @@ public class MainServlet extends HttpServlet {
         commands.put("registration", new RegistrationCommand());
         commands.put("login", new LoginCommand());
         commands.put("logout", new LogOutCommand());
+        commands.put("user/home", new UserHomePageCommand());
     }
 
     @Override

@@ -29,4 +29,14 @@ public class UserServiceImpl implements UserService {
         return userDao.findOneByEmail(email);
     }
 
+    @Override
+    public Optional<User> CheckUserLoginAndPassword(String email, String password) throws LoginAndPasswordException {
+        Optional<User> userOptional = findUserByEmail(email);
+        String userPassword = userOptional.orElseThrow(LoginAndPasswordException::new).getPassword();
+        if (userPassword.equals(password)) {
+            return userOptional;
+        }
+        throw new LoginAndPasswordException();
+    }
+
 }

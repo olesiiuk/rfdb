@@ -21,7 +21,7 @@ public class JdbcDaoFactory extends DaoFactory {
     private Connection getConnection() {
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/rfdb", "root", "root");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "root");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

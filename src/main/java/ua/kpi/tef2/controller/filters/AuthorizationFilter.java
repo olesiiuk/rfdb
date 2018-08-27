@@ -21,9 +21,8 @@ public class AuthorizationFilter implements Filter {
 
         if (notAuthorized(path, userRole)) {
             HttpServletResponse resp = (HttpServletResponse) servletResponse;
-            //TODO decide where to send unauthorized user.
             //TODO Do logout for this user and clean user data from context and kill session
-            resp.sendRedirect(req.getContextPath() + HOME_PAGE);
+            resp.sendRedirect(req.getContextPath() + LOGOUT_PAGE);
             return;
         }
         filterChain.doFilter(servletRequest, servletResponse);
@@ -44,7 +43,7 @@ public class AuthorizationFilter implements Filter {
             return true;
         }
         return (role.equals("ADMIN") || role.equals("USER")) &&
-                (path.endsWith(REGISTRATION_PAGE) || path.endsWith(LOGIN_PAGE));
+                (path.endsWith("registration") || path.endsWith("login"));
     }
 
 

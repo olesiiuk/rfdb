@@ -22,7 +22,48 @@
 <body>
 <c:import url="/userHeader.jsp" charEncoding="utf-8"/>
 <br/>
-    <h2><fmt:message key="message.welcome.user"/>${sessionScope.get("login")}</h2>
+<h2><fmt:message key="message.welcome.user"/>${sessionScope.get("login")}</h2>
+
+<div>
+    <form action="${pageContext.request.contextPath}/user/order" method="post">
+        <table>
+            <tr>
+                <th>From</th>
+                <td>
+                    <select name="addressFrom">
+                        <option></option>
+                        <c:forEach var="address" items="${addressList}">
+                            <option value="${address.id}">${address.street} ${address.number}</option>
+                        </c:forEach>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>To</th>
+                <td>
+                    <select name="addressTo">
+                        <option></option>
+                        <c:forEach var="address" items="${addressList}">
+                            <option value="${address.id}">${address.street} ${address.number}</option>
+                        </c:forEach>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>
+                    <select name="carType">
+                        <option value="standard">Standard</option>
+                        <option value="premium">Premium</option>
+                    </select>
+                </td>
+            </tr>
+
+        </table>
+
+    </form>
+
+</div>
 
 </body>
 </html>

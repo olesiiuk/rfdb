@@ -16,7 +16,7 @@ public class UserDaoImpl implements UserDao {
     private final String USER_ROLE_FIELD_NAME = "role";
     private final String USER_NAME_FIELD = "name";
 
-    private final String INSERT_USER_QUERY = "INSERT INTO users (login, password, name, role) VALUES (?, ?, ?, ?)";
+    private final String INSERT_USER_QUERY = "INSERT INTO users (login, password, role, name) VALUES (?, ?, ?, ?)";
     private final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE id=?";
     private final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE login = ?";
 
@@ -36,8 +36,10 @@ public class UserDaoImpl implements UserDao {
             PreparedStatement statement = connection.prepareStatement(INSERT_USER_QUERY);
 
             statement.setString(1, entity.getLogin());
-            statement.setString(2, entity.getPassword());
+            statement.setString(2 ,entity.getPassword());
             statement.setString(3, entity.getRole());
+            statement.setString(4, entity.getName());
+
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException ex) {
             throw new UserAlreadyExistsException(entity.getLogin());

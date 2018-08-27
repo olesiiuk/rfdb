@@ -39,6 +39,7 @@
             <td><button type="submit"><fmt:message key="message.login"/></button></td>
         </tr>
     </table>
+    <h2>${errorData}</h2>
 </form>
 </body>
 </html>

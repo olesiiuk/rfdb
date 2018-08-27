@@ -11,6 +11,7 @@ public interface UserService {
     //TODO in implementation try to get one by email rom db then save or throw exception
     void saveNewUser(User user) throws UserAlreadyExistsException;
 
-
     Optional<User> findUserByEmail(String email) throws LoginAndPasswordException;
+
+    Optional<User> CheckUserLoginAndPassword(String email, String password) throws LoginAndPasswordException;
 }
