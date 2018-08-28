@@ -16,4 +16,8 @@ public interface CarService {
 
     void removeCar(Car car);
 
+    int timeToArrive(Car car);
+
+    boolean hasAvailableCars();
+
 }

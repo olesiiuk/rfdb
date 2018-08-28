@@ -1,8 +1,9 @@
 package ua.kpi.tef2.controller.command;
 
+import ua.kpi.tef2.model.entity.Car;
 import ua.kpi.tef2.model.entity.User;
-import ua.kpi.tef2.model.exceptions.LoginAndPasswordException;
 import ua.kpi.tef2.model.service.AddressService;
+import ua.kpi.tef2.model.service.CarService;
 import ua.kpi.tef2.model.service.PriceService;
 import ua.kpi.tef2.model.service.UserService;
 
@@ -11,18 +12,21 @@ import javax.servlet.http.HttpSession;
 
 import java.util.Optional;
 
-import static ua.kpi.tef2.controller.PageNames.LOGIN_PAGE;
-import static ua.kpi.tef2.controller.PageNames.REDIRECT_PREFIX;
-import static ua.kpi.tef2.controller.PageNames.USER_HOME_PAGE;
+import static ua.kpi.tef2.controller.PageNames.*;
 
 public class FindCarCommand implements Command {
 
     private final String CAR_TYPE_PARAM = "carType";
     private final String ADDRESS_FROM_PARAM = "addressFrom";
     private final String ADDRESS_TO_PARAM = "addressTo";
-    private final String ERROR_MESSAGE_PARAM = "errorMessage";
-    private final String INVALID_ADDRESS_MESSAGE = "message.invalid.address";
     private final String LOGIN_PARAM = "login";
+    private final String PRICE_PARAM = "price";
+    private final String TIME_PARAM = "timeToArrive";
+    private final String INVALID_ADDRESS_MESSAGE_PARAM = "errorMessage";
+    private final String NO_AVAILABLE_CARS_MESSAGE_PARAM = "noCarsMessage";
+
+    private final String NO_AVAILABLE_CARS_MESSAGE = "message.noAvailableCars";
+    private final String INVALID_ADDRESS_MESSAGE = "message.invalid.address";
 
     private AddressService addressService;
 
@@ -30,10 +34,15 @@ public class FindCarCommand implements Command {
 
     private PriceService priceService;
 
-    public FindCarCommand(AddressService addressService, UserService userService, PriceService priceService) {
+    private CarService carService;
+
+    public FindCarCommand(AddressService addressService, UserService userService,
+                          PriceService priceService, CarService carService) {
+
         this.addressService = addressService;
         this.userService = userService;
         this.priceService = priceService;
+        this.carService = carService;
     }
 
     @Override
@@ -44,7 +53,7 @@ public class FindCarCommand implements Command {
         String carType = request.getParameter(CAR_TYPE_PARAM);
 
         if (isNotValid(addressFrom, addressTo)) {
-            request.setAttribute(ERROR_MESSAGE_PARAM, INVALID_ADDRESS_MESSAGE);
+            request.setAttribute(INVALID_ADDRESS_MESSAGE_PARAM, INVALID_ADDRESS_MESSAGE);
             return USER_HOME_PAGE;
         }
 
@@ -60,8 +69,14 @@ public class FindCarCommand implements Command {
 
         int price = priceService.getPrice(distance, carType, currentUser);
 
+        if (carService.hasAvailableCars()) {
+            request.setAttribute(PRICE_PARAM, price);
+            request.setAttribute(TIME_PARAM, carService.timeToArrive(new Car()));
+        } else {
+            request.setAttribute(NO_AVAILABLE_CARS_MESSAGE_PARAM, NO_AVAILABLE_CARS_MESSAGE);
+        }
 
-        return null;
+        return USER_RESULT_PAGE;
     }
 
     private Optional<User> getCurrentUser(HttpServletRequest request) {

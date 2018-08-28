@@ -38,7 +38,7 @@ public class UserDaoImpl implements UserDao {
             PreparedStatement statement = connection.prepareStatement(INSERT_USER_QUERY);
 
             statement.setString(1, entity.getLogin());
-            statement.setString(2 ,entity.getPassword());
+            statement.setString(2, entity.getPassword());
             statement.setString(3, entity.getRole());
             statement.setString(4, entity.getName());
 
@@ -65,18 +65,16 @@ public class UserDaoImpl implements UserDao {
         return Optional.empty();
     }
 
-    private Optional<User> compileUser(ResultSet rs) {
+    private Optional<User> compileUser(ResultSet rs) throws SQLException {
         User user = new User();
-        try {
-            user.setId(rs.getInt(USER_ID_FIELD_NAME));
-            user.setLogin(rs.getString(USER_LOGIN_FIELD_NAME));
-            user.setPassword(rs.getString(USER_PASSWORD_FIELD_NAME));
-            user.setName(rs.getString(USER_NAME_FIELD));
-            user.setRole(rs.getString(USER_ROLE_FIELD_NAME));
-            user.setSum(rs.getInt(USER_SUM_FIELD));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        user.setId(rs.getInt(USER_ID_FIELD_NAME));
+        user.setLogin(rs.getString(USER_LOGIN_FIELD_NAME));
+        user.setPassword(rs.getString(USER_PASSWORD_FIELD_NAME));
+        user.setName(rs.getString(USER_NAME_FIELD));
+        user.setRole(rs.getString(USER_ROLE_FIELD_NAME));
+        user.setSum(rs.getInt(USER_SUM_FIELD));
+
         return Optional.of(user);
     }
 
@@ -87,8 +85,8 @@ public class UserDaoImpl implements UserDao {
             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USERS);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                User user = compileUser(rs).get();
-                users.add(user);
+                Optional<User> user = compileUser(rs);
+                user.ifPresent(users::add);
             }
             return users;
 

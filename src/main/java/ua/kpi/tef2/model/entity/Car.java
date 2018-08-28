@@ -15,6 +15,13 @@ public class Car {
     public Car() {
     }
 
+    public Car(String model, String brand, String type, boolean isAvailable) {
+        this.model = model;
+        this.brand = brand;
+        this.type = type;
+        this.isAvailable = isAvailable;
+    }
+
     public Car(int id, String model, String brand, String type, boolean isAvailable) {
         this.id = id;
         this.model = model;
@@ -61,5 +68,16 @@ public class Car {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", model='" + model + '\'' +
+                ", brand='" + brand + '\'' +
+                ", type='" + type + '\'' +
+                ", isAvailable=" + isAvailable +
+                '}';
     }
 }

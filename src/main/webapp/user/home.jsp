@@ -22,7 +22,9 @@
 <body>
 <c:import url="/userHeader.jsp" charEncoding="utf-8"/>
 <br/>
-<h2><fmt:message key="message.welcome.user"/>${sessionScope.get("login")}</h2>
+
+<%--//TODO change for name--%>
+<h2><fmt:message key="message.welcome.user"/>${sessionScope.get("name")}</h2>
 
 <div>
     <form action="${pageContext.request.contextPath}/user/findcar" method="post">

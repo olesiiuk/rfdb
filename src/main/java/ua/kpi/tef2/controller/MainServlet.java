@@ -2,6 +2,7 @@ package ua.kpi.tef2.controller;
 
 import ua.kpi.tef2.controller.command.*;
 import ua.kpi.tef2.model.service.impl.AddressServiceImpl;
+import ua.kpi.tef2.model.service.impl.CarServiceImpl;
 import ua.kpi.tef2.model.service.impl.StandardPriceService;
 import ua.kpi.tef2.model.service.impl.UserServiceImpl;
 
@@ -29,7 +30,8 @@ public class MainServlet extends HttpServlet {
         commands.put("logout", new LogOutCommand());
         commands.put("user/home", new UserHomePageCommand(new AddressServiceImpl()));
         commands.put("user/findcar", new FindCarCommand(new AddressServiceImpl(), new UserServiceImpl(),
-                new StandardPriceService()));
+                new StandardPriceService(), new CarServiceImpl()));
+        commands.put("user/confirm", new ConfirmOrderCommand());
     }
 
     @Override
@@ -49,8 +51,7 @@ public class MainServlet extends HttpServlet {
 
         String path = command.execute(request);
         if (isPageToRedirect(path)) {
-            String contextPath = request.getContextPath();
-            response.sendRedirect(contextPath + cutRedirectPrefix(path));
+            response.sendRedirect(request.getContextPath() + cutRedirectPrefix(path));
             return;
         }
 
@@ -59,10 +60,6 @@ public class MainServlet extends HttpServlet {
 
     private String cutRedirectPrefix(String path) {
         return path.replace(REDIRECT_PREFIX, "");
-    }
-
-    private boolean isLoginPage(String pageName) {
-        return pageName.equals(LOGIN_PAGE);
     }
 
     private boolean isPageToRedirect(String pageName) {

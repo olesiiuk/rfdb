@@ -12,6 +12,7 @@ public interface PageNames {
     String LOGOUT_PAGE = "/logout";
     String REDIRECT_PREFIX = "redirect:";
     String CONTEXT_PATH_REG_EX = ".*/app/";
+    String USER_RESULT_PAGE = "/user/result.jsp";
 
 
 }

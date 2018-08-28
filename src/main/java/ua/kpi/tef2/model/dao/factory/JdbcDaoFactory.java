@@ -1,8 +1,10 @@
 package ua.kpi.tef2.model.dao.factory;
 
 import ua.kpi.tef2.model.dao.AddressDao;
+import ua.kpi.tef2.model.dao.CarDao;
 import ua.kpi.tef2.model.dao.UserDao;
 import ua.kpi.tef2.model.dao.impl.AddressDaoImpl;
+import ua.kpi.tef2.model.dao.impl.CarDaoImpl;
 import ua.kpi.tef2.model.dao.impl.UserDaoImpl;
 
 import java.sql.Connection;
@@ -19,6 +21,11 @@ public class JdbcDaoFactory extends DaoFactory {
     @Override
     public AddressDao createAddressDao() {
         return new AddressDaoImpl(getConnection());
+    }
+
+    @Override
+    public CarDao createCarDao() {
+        return new CarDaoImpl(getConnection());
     }
 
     private Connection getConnection() {
