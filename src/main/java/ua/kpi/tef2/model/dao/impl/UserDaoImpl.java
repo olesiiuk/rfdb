@@ -1,5 +1,6 @@
-package ua.kpi.tef2.model.dao;
+package ua.kpi.tef2.model.dao.impl;
 
+import ua.kpi.tef2.model.dao.UserDao;
 import ua.kpi.tef2.model.entity.User;
 import ua.kpi.tef2.model.exceptions.UserAlreadyExistsException;
 
@@ -131,7 +132,7 @@ public class UserDaoImpl implements UserDao {
                 return compileUser(rs);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return Optional.empty();
     }

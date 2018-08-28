@@ -25,6 +25,7 @@ public class MainServlet extends HttpServlet {
         commands.put("login", new LoginCommand());
         commands.put("logout", new LogOutCommand());
         commands.put("user/home", new UserHomePageCommand());
+        commands.put("user/findcar", new FindCarCommand());
     }
 
     @Override

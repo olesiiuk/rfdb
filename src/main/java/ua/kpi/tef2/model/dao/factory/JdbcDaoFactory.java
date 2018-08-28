@@ -1,21 +1,24 @@
 package ua.kpi.tef2.model.dao.factory;
 
+import ua.kpi.tef2.model.dao.AddressDao;
 import ua.kpi.tef2.model.dao.UserDao;
-import ua.kpi.tef2.model.dao.UserDaoImpl;
+import ua.kpi.tef2.model.dao.impl.AddressDaoImpl;
+import ua.kpi.tef2.model.dao.impl.UserDaoImpl;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class JdbcDaoFactory extends DaoFactory {
 
     @Override
     public UserDao createUserDao() {
         return new UserDaoImpl(getConnection());
+    }
+
+    @Override
+    public AddressDao createAddressDao() {
+        return new AddressDaoImpl(getConnection());
     }
 
     private Connection getConnection() {

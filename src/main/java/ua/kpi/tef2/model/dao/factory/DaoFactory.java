@@ -1,5 +1,6 @@
 package ua.kpi.tef2.model.dao.factory;
 
+import ua.kpi.tef2.model.dao.AddressDao;
 import ua.kpi.tef2.model.dao.UserDao;
 
 public abstract class DaoFactory {
@@ -7,6 +8,8 @@ public abstract class DaoFactory {
     private static DaoFactory daoFactory;
 
     public abstract UserDao createUserDao();
+
+    public abstract AddressDao createAddressDao();
 
     public static DaoFactory getInstance() {
 

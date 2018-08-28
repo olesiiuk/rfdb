@@ -25,7 +25,7 @@
 <h2><fmt:message key="message.welcome.user"/>${sessionScope.get("login")}</h2>
 
 <div>
-    <form action="${pageContext.request.contextPath}/user/order" method="post">
+    <form action="${pageContext.request.contextPath}/user/findcar" method="post">
         <table>
             <tr>
                 <th>From</th>
@@ -58,7 +58,12 @@
                     </select>
                 </td>
             </tr>
-
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit"><fmt:message key="message.findCar"/></button>
+                </td>
+            </tr>
         </table>
 
     </form>
