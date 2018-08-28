@@ -2,7 +2,6 @@ package ua.kpi.tef2.controller.command;
 
 import ua.kpi.tef2.model.entity.Address;
 import ua.kpi.tef2.model.service.AddressService;
-import ua.kpi.tef2.model.service.impl.AddressServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -14,7 +13,11 @@ public class UserHomePageCommand implements Command {
 
     //TODO make address DAO and service.
 
-    private AddressService addressService = new AddressServiceImpl();
+    private AddressService addressService;
+
+    public UserHomePageCommand(AddressService addressService) {
+        this.addressService = addressService;
+    }
 
     @Override
     public String execute(HttpServletRequest request) {

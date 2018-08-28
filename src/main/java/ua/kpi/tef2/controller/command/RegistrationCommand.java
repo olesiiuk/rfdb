@@ -18,7 +18,11 @@ public class RegistrationCommand implements Command {
     private final String ERROR_MESSAGE = "errorMessage";
     private final String USER_NAME_PARAM = "userName";
 
-    private UserService userService = new UserServiceImpl();
+    private UserService userService;
+
+    public RegistrationCommand(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public String execute(HttpServletRequest request) {

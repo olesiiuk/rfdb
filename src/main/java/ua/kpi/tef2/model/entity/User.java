@@ -12,6 +12,8 @@ public class User {
 
     private String role;
 
+    private int sum;
+
     public User() {
     }
 
@@ -71,6 +73,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getSum() {
+        return sum;
+    }
+
+    public void setSum(int sum) {
+        this.sum = sum;
     }
 
     @Override

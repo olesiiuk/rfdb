@@ -1,6 +1,9 @@
 package ua.kpi.tef2.controller;
 
 import ua.kpi.tef2.controller.command.*;
+import ua.kpi.tef2.model.service.impl.AddressServiceImpl;
+import ua.kpi.tef2.model.service.impl.StandardPriceService;
+import ua.kpi.tef2.model.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,11 +24,12 @@ public class MainServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        commands.put("registration", new RegistrationCommand());
-        commands.put("login", new LoginCommand());
+        commands.put("registration", new RegistrationCommand(new UserServiceImpl()));
+        commands.put("login", new LoginCommand(new UserServiceImpl()));
         commands.put("logout", new LogOutCommand());
-        commands.put("user/home", new UserHomePageCommand());
-        commands.put("user/findcar", new FindCarCommand());
+        commands.put("user/home", new UserHomePageCommand(new AddressServiceImpl()));
+        commands.put("user/findcar", new FindCarCommand(new AddressServiceImpl(), new UserServiceImpl(),
+                new StandardPriceService()));
     }
 
     @Override

@@ -16,6 +16,7 @@ public class UserDaoImpl implements UserDao {
     private final String USER_PASSWORD_FIELD_NAME = "password";
     private final String USER_ROLE_FIELD_NAME = "role";
     private final String USER_NAME_FIELD = "name";
+    private final String USER_SUM_FIELD = "sum";
 
     private final String INSERT_USER_QUERY = "INSERT INTO users (login, password, role, name) VALUES (?, ?, ?, ?)";
     private final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE id=?";
@@ -72,6 +73,7 @@ public class UserDaoImpl implements UserDao {
             user.setPassword(rs.getString(USER_PASSWORD_FIELD_NAME));
             user.setName(rs.getString(USER_NAME_FIELD));
             user.setRole(rs.getString(USER_ROLE_FIELD_NAME));
+            user.setSum(rs.getInt(USER_SUM_FIELD));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

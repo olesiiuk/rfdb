@@ -4,7 +4,6 @@ import ua.kpi.tef2.controller.validators.InputValidator;
 import ua.kpi.tef2.model.entity.User;
 import ua.kpi.tef2.model.exceptions.LoginAndPasswordException;
 import ua.kpi.tef2.model.service.UserService;
-import ua.kpi.tef2.model.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -18,10 +17,14 @@ import static ua.kpi.tef2.controller.PageNames.*;
 
 public class LoginCommand implements Command {
 
-    private UserService userService = new UserServiceImpl();
+    private UserService userService;
 
     private final String EMAIL_ATR = "email";
     private final String PASSWORD_ATR = "password";
+
+    public LoginCommand(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -73,6 +76,11 @@ public class LoginCommand implements Command {
         return false;
     }
 
+    private void addUserToServletContextAndSession(User user, HttpServletRequest request) {
+        addUserToSession(user, request);
+        addUserToServletContext(user, request);
+    }
+
     private void addUserToServletContext(User user, HttpServletRequest request) {
 
         ServletContext context = request.getServletContext();
@@ -84,11 +92,6 @@ public class LoginCommand implements Command {
 
         loggedUsers.add(user.getLogin());
         context.setAttribute("loggedUsers", loggedUsers);
-    }
-
-    private void addUserToServletContextAndSession(User user, HttpServletRequest request) {
-        addUserToSession(user, request);
-        addUserToServletContext(user, request);
     }
 
     private void addUserToSession(User user, HttpServletRequest request) {

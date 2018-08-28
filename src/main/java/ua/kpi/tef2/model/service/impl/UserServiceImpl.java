@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUserByEmail(String email) throws LoginAndPasswordException {
+    public Optional<User> findUserByEmail(String email) {
         return userDao.findOneByEmail(email);
     }
 
