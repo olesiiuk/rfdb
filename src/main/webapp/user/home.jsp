@@ -30,7 +30,10 @@
     <form action="${pageContext.request.contextPath}/user/findcar" method="post">
         <table>
             <tr>
-                <th>From</th>
+                <td colspan="2"><fmt:message key="message.select.destination"/></td>
+            </tr>
+            <tr>
+                <th><fmt:message key="message.address.from"/></th>
                 <td>
                     <select name="addressFrom">
                         <option></option>
@@ -41,7 +44,7 @@
                 </td>
             </tr>
             <tr>
-                <th>To</th>
+                <th><fmt:message key="message.address.to"/></th>
                 <td>
                     <select name="addressTo">
                         <option></option>
@@ -52,11 +55,11 @@
                 </td>
             </tr>
             <tr>
-                <th>Type</th>
+                <th><fmt:message key="message.car.type"/></th>
                 <td>
                     <select name="carType">
-                        <option value="standard">Standard</option>
-                        <option value="premium">Premium</option>
+                        <option value="standard"><fmt:message key="message.car.type.standard"/></option>
+                        <option value="premium"><fmt:message key="message.car.type.premium"/></option>
                     </select>
                 </td>
             </tr>

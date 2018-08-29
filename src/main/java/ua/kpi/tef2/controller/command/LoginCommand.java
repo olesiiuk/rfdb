@@ -97,6 +97,7 @@ public class LoginCommand implements Command {
     private void addUserToSession(User user, HttpServletRequest request) {
         HttpSession session = request.getSession();
 
+        session.setAttribute("login", user.getLogin());
         session.setAttribute("name", user.getName());
         session.setAttribute("role", user.getRole());
     }

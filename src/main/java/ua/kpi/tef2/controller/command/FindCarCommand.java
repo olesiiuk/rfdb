@@ -59,12 +59,13 @@ public class FindCarCommand implements Command {
 
         int distance = addressService.getDistance(Integer.parseInt(addressFrom), Integer.parseInt(addressTo));
 
+        //TODO make this block simpler
         Optional<User> currentUserOptional = getCurrentUser(request);
         User currentUser;
         if (currentUserOptional.isPresent()) {
             currentUser = currentUserOptional.get();
         } else {
-            return REDIRECT_PREFIX + LOGIN_PAGE;
+            return REDIRECT_PREFIX + LOGOUT_PAGE;
         }
 
         int price = priceService.getPrice(distance, carType, currentUser);
