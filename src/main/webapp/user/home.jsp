@@ -23,10 +23,8 @@
 <c:import url="/userHeader.jsp" charEncoding="utf-8"/>
 <br/>
 
-<%--//TODO change for name--%>
-<h2><fmt:message key="message.welcome.user"/>${sessionScope.get("name")}</h2>
-
-<div>
+<div align="center">
+    <h2><fmt:message key="message.welcome.user"/>${sessionScope.get("name")}</h2>
     <form action="${pageContext.request.contextPath}/user/findcar" method="post">
         <table>
             <tr>

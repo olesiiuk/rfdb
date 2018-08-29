@@ -15,9 +15,12 @@
 <c:import url="guesHeader.jsp" charEncoding="utf-8"/>
 <br/>
 
-<h2><fmt:message key="message.welcome"/></h2>
+<div align="center">
+    <h2><fmt:message key="message.welcome"/></h2>
     <a href="registration.jsp"><fmt:message key="message.registration"/> </a>
     <br/>
     <a href="login.jsp"><fmt:message key="message.page.login"/> </a>
+</div>
+
 </body>
 </html>

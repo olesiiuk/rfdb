@@ -22,24 +22,31 @@
 <body>
 <c:import url="guesHeader.jsp" charEncoding="UTF-8"/>
 <br/>
+<div align="center">
+    <h2><fmt:message key="title.page.login"/></h2>
+    <form action="${pageContext.request.contextPath}/login" method="post">
+        <table>
+            <tr>
+                <th><fmt:message key="message.email"/></th>
+                <td><input type="email" name="email"></td>
+            </tr>
+            <tr>
+                <th><fmt:message key="message.password"/></th>
+                <td><input type="password" name="password"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button type="submit"><fmt:message key="message.login"/></button></td>
+            </tr>
+        </table>
 
-<h2><fmt:message key="title.page.login"/></h2>
-<form action="${pageContext.request.contextPath}/login" method="post">
-    <table>
-        <tr>
-            <th><fmt:message key="message.email"/></th>
-            <td><input type="email" name="email"></td>
-        </tr>
-        <tr>
-            <th><fmt:message key="message.password"/></th>
-            <td><input type="password" name="password"></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><button type="submit"><fmt:message key="message.login"/></button></td>
-        </tr>
-    </table>
-    <h2>${errorData}</h2>
+        <c:set var="errorDataMessage" value="${errorData}"/>
+        <c:if test="${not empty errorDataMessage}">
+        <h2><fmt:message key="${errorData}"/></h2>
+        </c:if>
+</div>
+
+
 </form>
 </body>
 </html>

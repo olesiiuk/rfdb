@@ -33,7 +33,7 @@ public class LoginCommand implements Command {
         String password = request.getParameter(PASSWORD_ATR);
 
         if (InputValidator.isNotValidUserData(email, password)) {
-            request.setAttribute("errorData", "Invalid login or password");
+            request.setAttribute("errorData", "message.invalid.login.password");
             return LOGIN_PAGE;
         }
 
@@ -41,12 +41,12 @@ public class LoginCommand implements Command {
         try {
             user = userService.CheckUserLoginAndPassword(email, password).orElseThrow(LoginAndPasswordException::new);
         } catch (LoginAndPasswordException e) {
-            request.setAttribute("errorData", "Invalid login or password");
+            request.setAttribute("errorData", "message.invalid.login.password");
             return LOGIN_PAGE;
         }
 
         if (isAlreadyLogged(user, request)) {
-            request.setAttribute("errorData", "Account already in use");
+            request.setAttribute("errorData", "message.account.alreadyInUse");
             return LOGIN_PAGE;
         }
 
@@ -72,7 +72,6 @@ public class LoginCommand implements Command {
         if (loggedUsers != null) {
             return loggedUsers.contains(user.getLogin());
         }
-
         return false;
     }
 
@@ -89,7 +88,6 @@ public class LoginCommand implements Command {
         if (loggedUsers == null) {
             loggedUsers = new HashSet<>();
         }
-
         loggedUsers.add(user.getLogin());
         context.setAttribute("loggedUsers", loggedUsers);
     }

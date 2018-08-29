@@ -25,19 +25,22 @@
         </form>
     </c:if>
 
-    <table>
-        <tr>
-            <th>Price</th>
-            <td>${price}</td>
-        </tr>
-        <tr>
-            <th>Time to wait</th>
-            <td>${timeToArrive}</td>
-        </tr>
-        <form action="${pageContext.request.contextPath}/user/confirm" method="post">
-            <button type="submit">Confirm Order</button>
-        </form>
-    </table>
+    <div align="center">
+        <table>
+            <tr>
+                <th>Price</th>
+                <td>${price}</td>
+            </tr>
+            <tr>
+                <th>Time to wait</th>
+                <td>${timeToArrive}</td>
+            </tr>
+            <form action="${pageContext.request.contextPath}/user/confirm" method="post">
+                <button type="submit">Confirm Order</button>
+            </form>
+        </table>
+    </div>
+
 </div>
 
 </body>
